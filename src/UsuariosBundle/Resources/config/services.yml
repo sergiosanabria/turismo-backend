@@ -1,0 +1,10 @@
+services:
+#    usuarios.example:
+#        class: UsuariosBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    usuario.form.group:
+        class: UsuariosBundle\Form\GrupoType
+        tags:
+            - { name: form.type, alias: usuarios_bundle_grupo_type }
+

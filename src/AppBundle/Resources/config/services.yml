@@ -1,0 +1,13 @@
+services:
+    app_bundle.controller.contacto:
+        class: AppBundle\Controller\ContactosRestController
+        arguments: ['@doctrine.orm.entity_manager', '@app_bundle.repo.contacto', '@form.factory', '@router']
+    app_bundle.repo.contacto:
+            class: AppBundle\Repository\ContactoRepository
+            factory_service: doctrine.orm.default_entity_manager
+            factory_method: getRepository
+            arguments:
+                - AppBundle\Entity\Contacto
+#    app_bundle.controller.user:
+#        class: Nmpolo\RestBundle\Controller\UserController
+#        arguments: [@doctrine.orm.entity_manager, @nmpolo_rest.repo.user, @form.factory, @router]

@@ -1,0 +1,12 @@
+#easy admin
+easy_admin:
+    entities:
+        Contacto:
+            class: AppBundle\Entity\Contacto
+            form:
+                fields:
+                    - { property: 'nombre', type: 'text' }
+                    - { property: 'apellido', type: 'text' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'mensaje', type: 'ckeditor' }
+                    - { property: 'activo' }

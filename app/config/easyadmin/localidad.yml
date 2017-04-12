@@ -1,0 +1,11 @@
+#easy admin
+easy_admin:
+    entities:
+        Localidad:
+            class: Matudelatower\UbicacionBundle\Entity\Localidad
+            form:
+                fields:
+                   - { property: 'descripcion', type: 'text' }
+                   - { property: 'codigo', type: 'text' }
+                   - { property: 'codigoPostal', type: 'text' }
+                   - { property: 'departamento' }

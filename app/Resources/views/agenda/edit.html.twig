@@ -1,0 +1,33 @@
+{% extends '::custom_base.html.twig' %}
+{% block content %}
+    <section class="content-header">
+        {% block content_header %}
+            <h1 class="title">
+                {% block content_title %}
+                    <h1 class="title" xmlns="http://www.w3.org/1999/html">Edición Agenda</h1>
+                {% endblock %}
+            </h1>
+        {% endblock content_header %}
+    </section>
+    {% form_theme edit_form with easyadmin_config('design.form_theme') %}
+
+    {{ form_start(edit_form) }}
+    <div class="content">
+        {{ form_widget(edit_form) }}
+        <button class="btn btn-primary" type="submit" value="Edit"/>
+        <i class="fa fa-save"></i> Guardar </button>
+    </div>
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a class="btn btn-secondary action-list"
+               href="{{ path('admin') }}">{{ 'action.list' |trans(domain = 'messages') }}</a>
+        </li>
+        {#<li>#}
+        {#{{ form_start(delete_form) }}#}
+        {#<input type="submit" value="Delete">#}
+        {#{{ form_end(delete_form) }}#}
+        {#</li>#}
+    </ul>
+{% endblock %}

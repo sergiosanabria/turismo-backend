@@ -1,0 +1,10 @@
+#easy admin
+easy_admin:
+    entities:
+        Provincia:
+            class: Matudelatower\UbicacionBundle\Entity\Provincia
+            form:
+                fields:
+                    - { property: 'descripcion', type: 'text' }
+                    - { property: 'codigo', type: 'text' }
+                    - { property: 'pais' }

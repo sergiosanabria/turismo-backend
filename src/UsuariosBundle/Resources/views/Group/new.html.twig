@@ -1,0 +1,7 @@
+{% extends "ThemeBundle:Default:layout_base.html.twig" %}
+
+{% block content %}
+    {% block fos_user_content %}
+        {% include "FOSUserBundle:Group:new_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agenda</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ agenda.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ agenda.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Resumen</th>
+                <td>{{ agenda.resumen }}</td>
+            </tr>
+            <tr>
+                <th>Cuerpo</th>
+                <td>{{ agenda.cuerpo }}</td>
+            </tr>
+            <tr>
+                <th>Visibledesde</th>
+                <td>{% if agenda.visibleDesde %}{{ agenda.visibleDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Visiblehasta</th>
+                <td>{% if agenda.visibleHasta %}{{ agenda.visibleHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaeventodesde</th>
+                <td>{% if agenda.fechaEventoDesde %}{{ agenda.fechaEventoDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaeventohasta</th>
+                <td>{% if agenda.fechaEventoHasta %}{{ agenda.fechaEventoHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Orden</th>
+                <td>{{ agenda.orden }}</td>
+            </tr>
+            <tr>
+                <th>Creacion</th>
+                <td>{{ agenda.creacion }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{% if agenda.activo %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Creado</th>
+                <td>{% if agenda.creado %}{{ agenda.creado|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Actualizado</th>
+                <td>{% if agenda.actualizado %}{{ agenda.actualizado|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('agenda_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('agenda_edit', { 'id': agenda.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

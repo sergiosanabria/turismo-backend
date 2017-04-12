@@ -1,0 +1,28 @@
+{% extends 'ThemeBundle:Default:layout_base.html.twig' %}
+
+{% block content_title %}
+    Formulario de Alta
+{% endblock %}
+
+{% block content -%}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">PermisoAplicacion</h3>
+            </div>
+
+
+    {{ form(form) }}
+
+        <div class="box-footer">
+<a class="btn btn-default" href="{{ path('permiso_aplicacion') }}">
+    Volver
+</a>
+
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

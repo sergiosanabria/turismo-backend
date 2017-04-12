@@ -1,0 +1,19 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Grupo</h3>
+            </div>
+            <form action="{{ path('fos_user_group_edit', {'groupName': group_name} ) }}" {{ form_enctype(form) }}
+                  method="POST"
+                  class="box-body fos_user_group_new">
+                {{ form_widget(form) }}
+                <div>
+                    <input class="btn btn-primary" type="submit" value="{{ 'group.edit.submit'|trans }}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+app_agenda:
+    resource: "@AppBundle/Resources/config/routing/agenda.yml"
+    prefix:   /agenda
+
+app_noticias:
+    resource: "@AppBundle/Resources/config/routing/noticia.yml"
+    prefix:   /noticias
+
+app_atraccion:
+    resource: "@AppBundle/Resources/config/routing/atraccion.yml"
+    prefix:   /atraccion
+
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }

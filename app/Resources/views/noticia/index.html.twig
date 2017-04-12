@@ -1,0 +1,48 @@
+{% extends 'EasyAdminBundle:default:layout.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
+
+{% block main %}
+    <h1>Noticia list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Resumen</th>
+                <th>Visible</th>
+                <th>Orden</th>
+                <th>Activo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for noticium in noticias %}
+            <tr>
+                <td><a href="{{ path('noticias_show', { 'id': noticium.id }) }}">{{ noticium.id }}</a></td>
+                <td>{{ noticium.titulo }}</td>
+                <td>{{ noticium.resumen }}</td>
+                <td>{% if noticium.visible %}Yes{% else %}No{% endif %}</td>
+                <td>{{ noticium.orden }}</td>
+                <td>{% if noticium.activo %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('noticias_show', { 'id': noticium.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('noticias_edit', { 'id': noticium.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('noticias_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

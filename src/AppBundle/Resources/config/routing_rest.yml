@@ -1,0 +1,19 @@
+noticias :
+  type: rest
+  resource:     "AppBundle:NoticiasRest"
+  name_prefix:  api_
+
+agendas :
+  type: rest
+  resource:     "AppBundle:AgendasRest"
+  name_prefix:  api_
+
+atraccion :
+  type: rest
+  resource:     "AppBundle:AtraccionRest"
+  name_prefix:  api_
+
+contactos :
+    type: rest
+    resource: app_bundle.controller.contacto
+    name_prefix:  api_

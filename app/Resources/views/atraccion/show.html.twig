@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Atraccion</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ atraccion.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ atraccion.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Resumen</th>
+                <td>{{ atraccion.resumen }}</td>
+            </tr>
+            <tr>
+                <th>Cuerpo</th>
+                <td>{{ atraccion.cuerpo }}</td>
+            </tr>
+            <tr>
+                <th>Visibledesde</th>
+                <td>{% if atraccion.visibleDesde %}{{ atraccion.visibleDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Visiblehasta</th>
+                <td>{% if atraccion.visibleHasta %}{{ atraccion.visibleHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaeventodesde</th>
+                <td>{% if atraccion.fechaEventoDesde %}{{ atraccion.fechaEventoDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechaeventohasta</th>
+                <td>{% if atraccion.fechaEventoHasta %}{{ atraccion.fechaEventoHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Orden</th>
+                <td>{{ atraccion.orden }}</td>
+            </tr>
+            <tr>
+                <th>Creacion</th>
+                <td>{{ atraccion.creacion }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{% if atraccion.activo %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Creado</th>
+                <td>{% if atraccion.creado %}{{ atraccion.creado|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Actualizado</th>
+                <td>{% if atraccion.actualizado %}{{ atraccion.actualizado|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('atraccion_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('atraccion_edit', { 'id': atraccion.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

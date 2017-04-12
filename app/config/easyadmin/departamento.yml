@@ -1,0 +1,10 @@
+#easy admin
+easy_admin:
+    entities:
+        Departamento:
+            class: Matudelatower\UbicacionBundle\Entity\Departamento
+            form:
+                fields:
+                    - { property: 'descripcion', type: 'text' }
+                    - { property: 'codigo', type: 'text' }
+                    - { property: 'provincia' }

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Agenda list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Resumen</th>
+                <th>Cuerpo</th>
+                <th>Visibledesde</th>
+                <th>Visiblehasta</th>
+                <th>Fechaeventodesde</th>
+                <th>Fechaeventohasta</th>
+                <th>Orden</th>
+                <th>Creacion</th>
+                <th>Activo</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agenda in agendas %}
+            <tr>
+                <td><a href="{{ path('agenda_show', { 'id': agenda.id }) }}">{{ agenda.id }}</a></td>
+                <td>{{ agenda.titulo }}</td>
+                <td>{{ agenda.resumen }}</td>
+                <td>{{ agenda.cuerpo }}</td>
+                <td>{% if agenda.visibleDesde %}{{ agenda.visibleDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if agenda.visibleHasta %}{{ agenda.visibleHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if agenda.fechaEventoDesde %}{{ agenda.fechaEventoDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if agenda.fechaEventoHasta %}{{ agenda.fechaEventoHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ agenda.orden }}</td>
+                <td>{{ agenda.creacion }}</td>
+                <td>{% if agenda.activo %}Yes{% else %}No{% endif %}</td>
+                <td>{% if agenda.creado %}{{ agenda.creado|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if agenda.actualizado %}{{ agenda.actualizado|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('agenda_show', { 'id': agenda.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('agenda_edit', { 'id': agenda.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('agenda_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

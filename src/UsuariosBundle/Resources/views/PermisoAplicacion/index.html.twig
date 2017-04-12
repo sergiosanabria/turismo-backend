@@ -1,0 +1,65 @@
+    {% extends 'ThemeBundle:Default:layout_base.html.twig' %}
+
+    {% block content -%}
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Listado PermisoAplicacion</h3>
+
+                    <div class="box-tools">
+                        <div class="input-group" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control input-sm pull-right"
+                                   placeholder="Buscar">
+
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+
+                        <tr>
+                                <th>Id</th>
+                                <th>Activo</th>
+                                <th>Creado</th>
+                                <th>Actualizado</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                        {% for entity in entities %}
+                        <tr>
+                                    <td>
+                                        <a href="{{ path('permiso_aplicacion_show', { 'id': entity.id }) }}">{{ entity.id }}</a>
+                                    </td>
+                                    <td>{{ entity.activo }}</td>
+                                    <td>{% if entity.creado %}{{ entity.creado|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if entity.actualizado %}{{ entity.actualizado|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>
+
+                        <a class="btn btn-default" href="{{ path('permiso_aplicacion_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i></a>
+
+                        <a class="btn btn-default" href="{{ path('permiso_aplicacion_edit', { 'id': entity.id }) }}"><i class="fa fa-edit"></i></a>
+
+                                    </td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                </div>
+                <div class="box-footer">
+                    
+                        <a class="btn btn-primary" href="{{ path('permiso_aplicacion_new') }}">
+                            Nuevo
+                        </a>
+
+                                    </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

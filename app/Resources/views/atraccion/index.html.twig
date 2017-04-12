@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Atraccion list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Resumen</th>
+                <th>Cuerpo</th>
+                <th>Fechaeventodesde</th>
+                <th>Fechaeventohasta</th>
+                <th>Orden</th>
+                <th>Creacion</th>
+                <th>Activo</th>
+                <th>Creado</th>
+                <th>Actualizado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atraccion in atraccions %}
+            <tr>
+                <td><a href="{{ path('atraccion_show', { 'id': atraccion.id }) }}">{{ atraccion.id }}</a></td>
+                <td>{{ atraccion.titulo }}</td>
+                <td>{{ atraccion.resumen }}</td>
+                <td>{{ atraccion.cuerpo }}</td>
+                <td>{% if atraccion.fechaEventoDesde %}{{ atraccion.fechaEventoDesde|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if atraccion.fechaEventoHasta %}{{ atraccion.fechaEventoHasta|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ atraccion.orden }}</td>
+                <td>{{ atraccion.creacion }}</td>
+                <td>{% if atraccion.activo %}Yes{% else %}No{% endif %}</td>
+                <td>{% if atraccion.creado %}{{ atraccion.creado|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if atraccion.actualizado %}{{ atraccion.actualizado|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('atraccion_show', { 'id': atraccion.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('atraccion_edit', { 'id': atraccion.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('atraccion_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

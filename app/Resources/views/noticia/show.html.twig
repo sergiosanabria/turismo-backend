@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Noticia</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ noticium.id }}</td>
+            </tr>
+            <tr>
+                <th>Titulo</th>
+                <td>{{ noticium.titulo }}</td>
+            </tr>
+            <tr>
+                <th>Resumen</th>
+                <td>{{ noticium.resumen }}</td>
+            </tr>
+            <tr>
+                <th>Cuerpo</th>
+                <td>{{ noticium.cuerpo }}</td>
+            </tr>
+            <tr>
+                <th>Visible</th>
+                <td>{% if noticium.visible %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Orden</th>
+                <td>{{ noticium.orden }}</td>
+            </tr>
+            <tr>
+                <th>Activo</th>
+                <td>{% if noticium.activo %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('noticias_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('noticias_edit', { 'id': noticium.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

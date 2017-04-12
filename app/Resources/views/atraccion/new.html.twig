@@ -1,0 +1,28 @@
+{% extends '::custom_base.html.twig' %}
+
+{% block content %}
+    <section class="content-header">
+        {% block content_header %}
+            <h1 class="title">
+                {% block content_title %}
+                    <h1 class="title" xmlns="http://www.w3.org/1999/html">Nueva Atraccion</h1>
+                {% endblock %}
+            </h1>
+        {% endblock content_header %}
+    </section>
+    {% form_theme form with easyadmin_config('design.form_theme') %}
+
+    {{ form_start(form) }}
+    <div class="content">
+        {{ form_widget(form) }}
+        <button class="btn btn-primary" type="submit" value="Create"><i class="fa fa-save"></i> Guardar</button>
+    </div>
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a class="btn btn-secondary action-list"
+               href="{{ path('admin', {'entity':'Atraccion'}) }}">{{ 'action.list' |trans(domain = 'messages') }}</a>
+        </li>
+    </ul>
+{% endblock %}

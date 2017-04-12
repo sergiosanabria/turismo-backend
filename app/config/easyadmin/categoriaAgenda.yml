@@ -1,0 +1,10 @@
+#easy admin
+easy_admin:
+    entities:
+        CategoriaAgenda:
+            class: AppBundle\Entity\CategoriaAgenda
+            form:
+                fields:
+                    - { property: 'nombre', type: 'text' }
+                    - { property: 'descripcion', type: 'text' }
+                    - { property: 'icono', type: 'text' }

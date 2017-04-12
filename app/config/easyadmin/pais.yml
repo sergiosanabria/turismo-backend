@@ -1,0 +1,10 @@
+#easy admin
+easy_admin:
+    entities:
+        Pais:
+            class: Matudelatower\UbicacionBundle\Entity\Pais
+            form:
+                fields:
+                    - { property: 'descripcion', type: 'text' }
+                    - { property: 'codigoPais', type: 'text' }
+                    - { property: 'codigoArea', type: 'text' }

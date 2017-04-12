@@ -1,0 +1,24 @@
+atraccion_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Atraccion:index" }
+    methods:  GET
+
+atraccion_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Atraccion:show" }
+    methods:  GET
+
+atraccion_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Atraccion:new" }
+    methods:  [GET, POST]
+
+atraccion_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Atraccion:edit" }
+    methods:  [GET, POST]
+
+atraccion_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Atraccion:delete" }
+    methods:  DELETE

@@ -1,0 +1,55 @@
+{% extends 'ThemeBundle:Default:layout_base.html.twig' %}
+
+{% block content_title %}
+   Resumen
+{% endblock %}
+
+{% block content -%}
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">PermisoAplicacion</h3>
+            </div>
+            <div class="box-body">
+                <table class="record_properties">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ entity.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Activo</th>
+                            <td>{{ entity.activo }}</td>
+                        </tr>
+                        <tr>
+                            <th>Creado</th>
+                            <td>{{ entity.creado|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Actualizado</th>
+                            <td>{{ entity.actualizado|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        <div class="box-footer">
+<a class="btn btn-default" href="{{ path('permiso_aplicacion') }}">
+    Volver
+</a>
+
+
+        <a class="btn btn-primary" href="{{ path('permiso_aplicacion_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+
+</div>
+</div>
+</div>
+</div>
+    {{ form(delete_form) }}
+
+
+{% endblock %}

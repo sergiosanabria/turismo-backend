@@ -1,0 +1,7 @@
+usuarios_usuarios:
+    resource: "@UsuariosBundle/Resources/config/routing/usuario.yml"
+    prefix:   /usuarios
+
+usuarios_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UsuariosBundle:Default:index }
