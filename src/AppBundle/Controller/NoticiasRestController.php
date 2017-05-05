@@ -15,8 +15,8 @@ class NoticiasRestController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $noticias = $em->getRepository('AppBundle:Noticia')->getNoticiasByPage($request->get('page', 1));
-        $ip = $this->getParameter('app.path.ip');
-
+        //$ip = $this->getParameter('app.path.ip');
+        $ip = $request->getHost();
         $host = $request->getScheme() . '://' . $ip . $request->getBasePath() . $this->getParameter('app.path.images.noticia');
 
         /**

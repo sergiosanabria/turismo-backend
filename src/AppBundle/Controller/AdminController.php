@@ -8,15 +8,15 @@ use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdmin
 class AdminController extends BaseAdminController
 {
 
-    public function newNoticiaAction()   {
-        return $this->redirectToRoute('noticias_new');
-    }
-    public function newAgendaAction()   {
-        return $this->redirectToRoute('agenda_new');
-    }
-    public function newAtraccionAction()   {
-        return $this->redirectToRoute('atraccion_new');
-    }
+//    public function newNoticiaAction()   {
+//        return $this->redirectToRoute('noticias_new');
+//    }
+//    public function newAgendaAction()   {
+//        return $this->redirectToRoute('agenda_new');
+//    }
+//    public function newAtraccionAction()   {
+//        return $this->redirectToRoute('atraccion_new');
+//    }
 
     public function createNewUserEntity()
     {

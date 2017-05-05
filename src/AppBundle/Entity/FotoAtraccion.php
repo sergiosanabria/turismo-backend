@@ -70,7 +70,7 @@ class FotoAtraccion
     /**
      * @var string
      * @Expose
-     * @ORM\Column(name="ruta", type="string", length=255)
+     * @ORM\Column(name="ruta", type="string", nullable=true, length=255)
      */
     private $ruta;
 
@@ -84,12 +84,13 @@ class FotoAtraccion
     /**
      * @var string
      * @Expose
-     * @ORM\Column(name="descripcion", type="string", length=255)
+     * @ORM\Column(name="descripcion",nullable=true, type="string", length=255)
      */
     private $descripcion;
 
-    public function __toString() {
-        return $this->ruta;
+    public function __toString()
+    {
+        return "";
     }
 
     public function getAbsolutePath()
@@ -99,19 +100,22 @@ class FotoAtraccion
             : $this->getUploadRootDir() . $this->ruta;
     }
 
-    public function getWebPath() {
+    public function getWebPath()
+    {
         return null === $this->ruta
             ? null
             : $this->getUploadDir() . '/' . $this->ruta;
     }
 
-    protected function getUploadRootDir() {
+    protected function getUploadRootDir()
+    {
         // the absolute directory ruta where uploaded
         // documents should be saved
         return __DIR__ . '/../../../web/' . $this->getUploadDir();
     }
 
-    public function getUploadDir() {
+    public function getUploadDir()
+    {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
         return 'uploads/images/atraccion/';
@@ -219,7 +223,7 @@ class FotoAtraccion
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -242,7 +246,7 @@ class FotoAtraccion
     /**
      * Get creado
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreado()
     {
@@ -265,7 +269,7 @@ class FotoAtraccion
     /**
      * Get actualizado
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getActualizado()
     {
@@ -288,7 +292,7 @@ class FotoAtraccion
     /**
      * Get ruta
      *
-     * @return string 
+     * @return string
      */
     public function getRuta()
     {
@@ -311,7 +315,7 @@ class FotoAtraccion
     /**
      * Get creadoPor
      *
-     * @return \UsuariosBundle\Entity\Usuario 
+     * @return \UsuariosBundle\Entity\Usuario
      */
     public function getCreadoPor()
     {
@@ -334,7 +338,7 @@ class FotoAtraccion
     /**
      * Get actualizadoPor
      *
-     * @return \UsuariosBundle\Entity\Usuario 
+     * @return \UsuariosBundle\Entity\Usuario
      */
     public function getActualizadoPor()
     {
@@ -380,7 +384,7 @@ class FotoAtraccion
     /**
      * Get descripcion
      *
-     * @return string 
+     * @return string
      */
     public function getDescripcion()
     {
@@ -403,7 +407,7 @@ class FotoAtraccion
     /**
      * Get tipo
      *
-     * @return string 
+     * @return string
      */
     public function getTipo()
     {

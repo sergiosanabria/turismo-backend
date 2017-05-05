@@ -13,6 +13,8 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Agenda
@@ -55,8 +57,9 @@ class Atraccion
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
-     * @ORM\Column(name="cuerpo", type="text")
+     * @ORM\Column(name="cuerpo", type="text", nullable=true)
      * @SerializedName("cuerpo")
      * @Expose
      */
@@ -133,6 +136,27 @@ class Atraccion
     private $direccion;
 
     /**
+     * @SerializedName("direccion_mapa")
+     * @VirtualProperty
+     */
+    public function getDireccionMapa()
+    {
+
+        if ($this->getDireccion()->count() > 0 && $this->getDireccion()->first()->getLocalidad()) {
+
+            $altura = $this->getDireccion()->first()->getAltura() ? $this->getDireccion()->first()->getAltura() . ', ' : ', ';
+            $calle = $this->getDireccion()->first()->getCalle() ? $this->getDireccion()->first()->getCalle() . ' ' : '';
+            return
+                $calle . $altura .
+                $this->getDireccion()->first()->getLocalidad() . ', ' .
+                $this->getDireccion()->first()->getLocalidad()->getDepartamento()->getProvincia();
+
+        }
+
+        return null;
+    }
+
+    /**
      * @SerializedName("archivos")
      * @VirtualProperty
      */
@@ -153,6 +177,24 @@ class Atraccion
         }
 
         return $archivos;
+    }
+
+    /**
+     * @SerializedName("categoria")
+     * @VirtualProperty
+     */
+    public function getCategoria()
+    {
+        return $this->getCategoriaAtraccion() ? $this->getCategoriaAtraccion()->getNombre() : null;
+    }
+
+    /**
+     * @SerializedName("icono")
+     * @VirtualProperty
+     */
+    public function getIcono()
+    {
+        return $this->getCategoriaAtraccion() ? $this->getCategoriaAtraccion()->getIcono() : null;
     }
 
 
@@ -344,6 +386,8 @@ class Atraccion
      */
     public function addFotoAtraccion(\AppBundle\Entity\FotoAtraccion $fotoAtraccion)
     {
+        $fotoAtraccion->setAtraccion($this);
+
         $this->fotoAtraccion[] = $fotoAtraccion;
 
         return $this;
@@ -447,6 +491,8 @@ class Atraccion
     public function addDireccion(\AppBundle\Entity\DireccionAtraccion $direccion)
     {
         $this->direccion[] = $direccion;
+
+        $direccion->setAtraccion($this);
 
         return $this;
     }

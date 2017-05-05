@@ -17,8 +17,8 @@ class AtraccionRestController extends FOSRestController
 //		$noticias = $em->getRepository( 'AppBundle:Atr' )->getAtraccionByPage($request->get('page', 1));
         $atracciones = $em->getRepository('AppBundle:Atraccion')->get();
 
-        $ip = $request->getHttpHost();
-        $ip = $this->getParameter('app.path.ip');
+        $ip = $request->getHost();
+        //$ip = $this->getParameter('app.path.ip');
 
         $host = $request->getScheme() . '://' . $ip . $request->getBasePath() . $this->getParameter('app.path.images.atraccion');
 

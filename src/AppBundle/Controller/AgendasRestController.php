@@ -12,10 +12,10 @@ class AgendasRestController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $agendas = $em->getRepository('AppBundle:Agenda')->getEventosByPage($request->get('page', 1));
-        $ip = $request->getHttpHost();
-        $ip = $this->getParameter('app.path.ip');
+        $ip = $request->getHost();
+        //$ip = $this->getParameter('app.path.ip');
 
-        $host = $request->getScheme() . '://' . $ip . $request->getBasePath() . $this->getParameter('app.path.images.atraccion');
+        $host = $request->getScheme() . '://' . $ip . $request->getBasePath() . $this->getParameter('app.path.images.agenda');
 
         $aAgendas = array();
 
@@ -29,24 +29,26 @@ class AgendasRestController extends FOSRestController
 
                 }
 
-                $texto = $this->formatoFecha($agenda->getFechaEventoDesde()->format('Y-m-d'));
-                $index = $this->findGrupoIndex($aAgendas, $texto);
-                if ($index !== false) {
-                    //es un grupo
-                    $aAgendas[$index]['eventos'][] = $agenda;
-                } else {
-                    //creo otro grupo
-                    $index = count($aAgendas);
 
-                    $aAgendas[$index]['texto'] = $texto;
-                    $aAgendas[$index]['eventos'][] = $agenda;
-                }
+//                AGRUPA POR CATEGORIA LAS AGENDAS
+//                $texto = $this->formatoFecha($agenda->getFechaEventoDesde()->format('Y-m-d'));
+//                $index = $this->findGrupoIndex($aAgendas, $texto);
+//                if ($index !== false) {
+//                    //es un grupo
+//                    $aAgendas[$index]['eventos'][] = $agenda;
+//                } else {
+//                    //creo otro grupo
+//                    $index = count($aAgendas);
+//
+//                    $aAgendas[$index]['texto'] = $texto;
+//                    $aAgendas[$index]['eventos'][] = $agenda;
+//                }
 
             }
         }
 
 
-        $vista = $this->view($aAgendas,
+        $vista = $this->view($agendas,
             200)
             ->setTemplate("AppBundle:Rest:getAgendas.html.twig")
             ->setTemplateVar('agendas');

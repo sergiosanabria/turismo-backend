@@ -20,62 +20,63 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ExclusionPolicy("all")
  *
  */
-class FotoNoticia {
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="id", type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+class FotoNoticia
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-	/**
-	 * @var datetime $creado
-	 *
-	 * @Gedmo\Timestampable(on="create")
-	 * @ORM\Column(name="creado", type="datetime")
-	 */
-	private $creado;
+    /**
+     * @var datetime $creado
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="creado", type="datetime")
+     */
+    private $creado;
 
-	/**
-	 * @var datetime $actualizado
-	 *
-	 * @Gedmo\Timestampable(on="update")
-	 * @ORM\Column(name="actualizado",type="datetime")
-	 */
-	private $actualizado;
+    /**
+     * @var datetime $actualizado
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(name="actualizado",type="datetime")
+     */
+    private $actualizado;
 
-	/**
-	 * @var integer $creadoPor
-	 *
-	 * @Gedmo\Blameable(on="create")
-	 * @ORM\ManyToOne(targetEntity="UsuariosBundle\Entity\Usuario")
-	 * @ORM\JoinColumn(name="creado_por", referencedColumnName="id", nullable=true)
-	 */
-	private $creadoPor;
+    /**
+     * @var integer $creadoPor
+     *
+     * @Gedmo\Blameable(on="create")
+     * @ORM\ManyToOne(targetEntity="UsuariosBundle\Entity\Usuario")
+     * @ORM\JoinColumn(name="creado_por", referencedColumnName="id", nullable=true)
+     */
+    private $creadoPor;
 
-	/**
-	 * @var integer $actualizadoPor
-	 *
-	 * @Gedmo\Blameable(on="update")
-	 * @ORM\ManyToOne(targetEntity="UsuariosBundle\Entity\Usuario")
-	 * @ORM\JoinColumn(name="actualizado_por", referencedColumnName="id", nullable=true)
-	 */
-	private $actualizadoPor;
+    /**
+     * @var integer $actualizadoPor
+     *
+     * @Gedmo\Blameable(on="update")
+     * @ORM\ManyToOne(targetEntity="UsuariosBundle\Entity\Usuario")
+     * @ORM\JoinColumn(name="actualizado_por", referencedColumnName="id", nullable=true)
+     */
+    private $actualizadoPor;
 
-	/**
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Noticia", inversedBy="fotoNoticias", cascade={"persist"})
-	 * @ORM\JoinColumn(name="noticia_id", referencedColumnName="id")
-	 */
-	private $noticia;
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Noticia", inversedBy="fotoNoticias", cascade={"persist"})
+     * @ORM\JoinColumn(name="noticia_id", referencedColumnName="id")
+     */
+    private $noticia;
 
-	/**
-	 * @var string
-	 * @Expose()
-	 * @ORM\Column(name="ruta", type="string", length=255)
-	 */
-	private $ruta;
+    /**
+     * @var string
+     * @Expose()
+     * @ORM\Column(name="ruta", type="string", length=255, nullable=true)
+     */
+    private $ruta;
     /**
      * @var string
      * @Expose
@@ -84,147 +85,150 @@ class FotoNoticia {
     private $tipo;
 
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(name="descripcion", type="string", length=255)
-	 */
-	private $descripcion;
+    /**
+     * @var string
+     * @Expose()
+     * @ORM\Column(name="descripcion",nullable=true, type="string", length=255)
+     */
+    private $descripcion;
 
-	public function __toString() {
-		return $this->ruta;
-	}
+    public function __toString()
+    {
+        return $this->ruta;
+    }
 
-	public function getAbsolutePath()
-	{
-		return null === $this->ruta
-			? null
-			: $this->getUploadRootDir() . $this->ruta;
-	}
+    public function getAbsolutePath()
+    {
+        return null === $this->ruta
+            ? null
+            : $this->getUploadRootDir() . $this->ruta;
+    }
 
-	public function getWebPath() {
-		return null === $this->ruta
-			? null
-			: $this->getUploadDir() . '/' . $this->ruta;
-	}
+    public function getWebPath()
+    {
+        return null === $this->ruta
+            ? null
+            : $this->getUploadDir() . '/' . $this->ruta;
+    }
 
-	protected function getUploadRootDir() {
-		// the absolute directory ruta where uploaded
-		// documents should be saved
-		return __DIR__ . '/../../../web/' . $this->getUploadDir();
-	}
+    protected function getUploadRootDir()
+    {
+        // the absolute directory ruta where uploaded
+        // documents should be saved
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
+    }
 
-	public function getUploadDir() {
-		// get rid of the __DIR__ so it doesn't screw up
-		// when displaying uploaded doc/image in the view.
-		return 'uploads/images/noticia/';
-	}
+    public function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/images/noticia/';
+    }
 
-	/**
-	 * @Assert\File(maxSize="6000000")
-	 */
-	private $foto;
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $foto;
 
-	/**
-	 * Sets foto.
-	 *
-	 * @param UploadedFile $foto
-	 */
-	public function setFoto(UploadedFile $foto = null)
-	{
-		$this->foto = $foto;
-		// check if we have an old image path
-		if (is_file($this->getAbsolutePath())) {
-			// store the old name to delete after the update
-			$this->temp = $this->getAbsolutePath();
-			$this->ruta = null;
-		} else {
-			$this->ruta = 'initial';
-		}
-	}
+    /**
+     * Sets foto.
+     *
+     * @param UploadedFile $foto
+     */
+    public function setFoto(UploadedFile $foto = null)
+    {
+        $this->foto = $foto;
+        // check if we have an old image path
+        if (is_file($this->getAbsolutePath())) {
+            // store the old name to delete after the update
+            $this->temp = $this->getAbsolutePath();
+            $this->ruta = null;
+        } else {
+            $this->ruta = 'initial';
+        }
+    }
 
-	/**
-	 * Get foto.
-	 *
-	 * @return UploadedFile
-	 */
-	public function getFoto()
-	{
-		return $this->foto;
-	}
+    /**
+     * Get foto.
+     *
+     * @return UploadedFile
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
 
-	/**
-	 * @ORM\PrePersist()
-	 * @ORM\PreUpdate()
-	 */
-	public function preUpload()
-	{
-		if (null !== $this->getFoto()) {
-			$this->ruta = $this->getFoto()->getClientOriginalName();
-		}
-	}
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFoto()) {
+            $this->ruta = $this->getFoto()->getClientOriginalName();
+        }
+    }
 
-	/**
-	 * Called after entity persistence
-	 *
-	 * @ORM\PostPersist()
-	 * @ORM\PostUpdate()
-	 */
-	public function upload()
-	{
-		// the file property can be empty if the field is not required
-		if (null === $this->getFoto()) {
-			return;
-		}
+    /**
+     * Called after entity persistence
+     *
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFoto()) {
+            return;
+        }
 
-		// check if we have an old image
-		if (isset($this->temp)) {
-			// delete the old image
-			unlink($this->temp);
-			// clear the temp image path
-			$this->temp = null;
-		}
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            unlink($this->temp);
+            // clear the temp image path
+            $this->temp = null;
+        }
 
 
-		// use the original file name here but you should
-		// sanitize it at least to avoid any security issues
+        // use the original file name here but you should
+        // sanitize it at least to avoid any security issues
 
-		// move takes the target directory and then the
-		// target filename to move to
-		$this->getFoto()->move(
-			$this->getUploadRootDir(),
-			$this->getFoto()->getClientOriginalName()
-		);
-		$this->setRuta($this->getFoto()->getClientOriginalName());
+        // move takes the target directory and then the
+        // target filename to move to
+        $this->getFoto()->move(
+            $this->getUploadRootDir(),
+            $this->getFoto()->getClientOriginalName()
+        );
+        $this->setRuta($this->getFoto()->getClientOriginalName());
 
-		// clean up the file property as you won't need it anymore
-		$this->setFoto(null);
-	}
+        // clean up the file property as you won't need it anymore
+        $this->setFoto(null);
+    }
 
-	/**
-	 * @ORM\PreRemove()
-	 */
-	public function storeFilenameForRemove()
-	{
-		$this->temp = $this->getAbsolutePath();
-	}
+    /**
+     * @ORM\PreRemove()
+     */
+    public function storeFilenameForRemove()
+    {
+        $this->temp = $this->getAbsolutePath();
+    }
 
-	/**
-	 * @ORM\PostRemove()
-	 */
-	public function removeUpload()
-	{
-		if (isset($this->temp)) {
-			unlink($this->temp);
-		}
-	}
-
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if (isset($this->temp)) {
+            unlink($this->temp);
+        }
+    }
 
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -247,7 +251,7 @@ class FotoNoticia {
     /**
      * Get creado
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreado()
     {
@@ -270,7 +274,7 @@ class FotoNoticia {
     /**
      * Get actualizado
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getActualizado()
     {
@@ -293,7 +297,7 @@ class FotoNoticia {
     /**
      * Get ruta
      *
-     * @return string 
+     * @return string
      */
     public function getRuta()
     {
@@ -316,7 +320,7 @@ class FotoNoticia {
     /**
      * Get creadoPor
      *
-     * @return \UsuariosBundle\Entity\Usuario 
+     * @return \UsuariosBundle\Entity\Usuario
      */
     public function getCreadoPor()
     {
@@ -339,7 +343,7 @@ class FotoNoticia {
     /**
      * Get actualizadoPor
      *
-     * @return \UsuariosBundle\Entity\Usuario 
+     * @return \UsuariosBundle\Entity\Usuario
      */
     public function getActualizadoPor()
     {
@@ -362,7 +366,7 @@ class FotoNoticia {
     /**
      * Get noticia
      *
-     * @return \AppBundle\Entity\Noticia 
+     * @return \AppBundle\Entity\Noticia
      */
     public function getNoticia()
     {
@@ -385,14 +389,13 @@ class FotoNoticia {
     /**
      * Get descripcion
      *
-     * @return string 
+     * @return string
      */
     public function getDescripcion()
     {
         return $this->descripcion;
     }
 
-    
 
     /**
      * Set tipo
@@ -410,7 +413,7 @@ class FotoNoticia {
     /**
      * Get tipo
      *
-     * @return string 
+     * @return string
      */
     public function getTipo()
     {

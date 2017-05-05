@@ -43,13 +43,16 @@ class AgendaController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            foreach ( $agenda->getFotoAgenda() as $fotoAgenda ) {
-                $fotoAgenda->setAgenda( $agenda );
+            foreach ($agenda->getFotoAgenda() as $fotoAgenda) {
+                $fotoAgenda->setAgenda($agenda);
             }
-            
-            foreach ( $agenda->getDireccion() as $direccion ) {
-                $direccion->setAgenda( $agenda );
+
+            if ($agenda->getDireccion() && count($agenda->getDireccion())) {
+                foreach ($agenda->getDireccion() as $direccion) {
+                    $direccion->setAgenda($agenda);
+                }
             }
+
 
             $em->persist($agenda);
             $em->flush();
@@ -89,15 +92,15 @@ class AgendaController extends Controller
         $fotosOriginales = new ArrayCollection();
 
         // Create an ArrayCollection of the current Tag objects in the database
-        foreach ( $agenda->getFotoAgenda() as $fotoAgenda ) {
-            $fotosOriginales->add( $fotoAgenda );
+        foreach ($agenda->getFotoAgenda() as $fotoAgenda) {
+            $fotosOriginales->add($fotoAgenda);
         }
-        
+
         $domiciliosOriginales = new ArrayCollection();
 
         // Create an ArrayCollection of the current Tag objects in the database
-        foreach ( $agenda->getDireccion() as $fotoAgenda ) {
-            $domiciliosOriginales->add( $fotoAgenda );
+        foreach ($agenda->getDireccion() as $fotoAgenda) {
+            $domiciliosOriginales->add($fotoAgenda);
         }
 
         $editForm->handleRequest($request);
@@ -105,24 +108,24 @@ class AgendaController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            foreach ( $agenda->getFotoAgenda() as $fotoAgenda ) {
-                $fotoAgenda->setAgenda( $agenda );
+            foreach ($agenda->getFotoAgenda() as $fotoAgenda) {
+                $fotoAgenda->setAgenda($agenda);
             }
 
-            foreach ( $fotosOriginales as $fotosOriginale ) {
-                if ( false === $agenda->getFotoAgenda()->contains( $fotosOriginale ) ) {
-                    $fotosOriginale->setAgenda( null );
-                    $em->remove( $fotosOriginale );
+            foreach ($fotosOriginales as $fotosOriginale) {
+                if (false === $agenda->getFotoAgenda()->contains($fotosOriginale)) {
+                    $fotosOriginale->setAgenda(null);
+                    $em->remove($fotosOriginale);
                 }
             }
-            foreach ( $agenda->getDireccion() as $direccion ) {
-                $direccion->setAgenda( $agenda );
+            foreach ($agenda->getDireccion() as $direccion) {
+                $direccion->setAgenda($agenda);
             }
 
-            foreach ( $domiciliosOriginales  as $domiciliosOriginale ) {
-                if ( false === $agenda->getDireccion()->contains( $domiciliosOriginale ) ) {
-                    $domiciliosOriginale->setAgenda( null );
-                    $em->remove( $domiciliosOriginale );
+            foreach ($domiciliosOriginales as $domiciliosOriginale) {
+                if (false === $agenda->getDireccion()->contains($domiciliosOriginale)) {
+                    $domiciliosOriginale->setAgenda(null);
+                    $em->remove($domiciliosOriginale);
                 }
             }
 
@@ -169,7 +172,6 @@ class AgendaController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('agenda_delete', array('id' => $agenda->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

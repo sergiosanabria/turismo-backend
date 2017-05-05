@@ -2,6 +2,10 @@
 
 namespace AppBundle\Form;
 
+use Matudelatower\UbicacionBundle\Form\EventListener\AddDepartamentoFieldSubscriber;
+use Matudelatower\UbicacionBundle\Form\EventListener\AddLocalidadFieldSubscriber;
+use Matudelatower\UbicacionBundle\Form\EventListener\AddPaisFieldSubscriber;
+use Matudelatower\UbicacionBundle\Form\EventListener\AddProvinciaFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,13 +20,16 @@ class DireccionAgendaType extends AbstractType
     {
         $builder
             ->add('calle')
-            ->add('altura')
+            ->add('altura');
+        $factory = $builder->getFormFactory();
 
-            ->add('localidad')
+        $builder->addEventSubscriber(new AddPaisFieldSubscriber($factory));
+        $builder->addEventSubscriber(new AddProvinciaFieldSubscriber($factory));
+        $builder->addEventSubscriber(new AddDepartamentoFieldSubscriber($factory));
+        $builder->addEventSubscriber(new AddLocalidadFieldSubscriber($factory));
 
-        ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

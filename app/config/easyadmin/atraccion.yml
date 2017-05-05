@@ -1,0 +1,20 @@
+#easy admin
+easy_admin:
+    entities:
+        Atraccion:
+            class: AppBundle\Entity\Atraccion
+            list:
+                actions:
+#                    - { name: '-edit'}
+#                    - { name: 'atraccion_edit', type: 'route', icon: 'pencil', label: '' }
+                    - { name: 'delete', icon: 'trash', label: '' }
+            form:
+                fields:
+                    - { property: 'titulo' }
+                    - { property: 'resumen'}
+                    - { property: 'categoriaAtraccion'}
+                    - { property: 'cuerpo', type: 'ckeditor' }
+                    - { property: 'orden' }
+                    - { property: 'fotoAtraccion', type: 'collection', type_options: { entry_type: 'AppBundle\Form\FotoAtraccionType', by_reference: false  } }
+                    - { property: 'direccion', type: 'collection', type_options: { entry_type: 'AppBundle\Form\DireccionAtraccionType', by_reference: false  } }
+                    - { property: 'activo' }

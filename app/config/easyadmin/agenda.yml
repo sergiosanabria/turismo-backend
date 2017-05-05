@@ -1,0 +1,24 @@
+#easy admin
+easy_admin:
+    entities:
+        Agenda:
+            class: AppBundle\Entity\Agenda
+            list:
+                actions:
+#                    - { name: '-edit'}
+#                    - { name: 'agenda_edit', type: 'route', icon: 'pencil', label: '' }
+                    - { name: 'delete', icon: 'trash', label: '' }
+            form:
+                fields:
+                    - { property: 'titulo' }
+                    - { property: 'resumen'}
+                    - { property: 'categoriaAgenda'}
+                    - { property: 'cuerpo', type: 'ckeditor' }
+                    - { property: 'visibleDesde', type_options: { widget: 'single_text', format: 'dd/MM/yyyy', attr: { class: 'datepicker' }} }
+                    - { property: 'visibleHasta',  type_options: { widget: 'single_text', format: 'dd/MM/yyyy', attr: { class: 'datepicker' }} }
+                    - { property: 'fechaEventoDesde', type_options: { widget: 'single_text', format: 'dd/MM/yyyy', attr: { class: 'datetimepicker' }} }
+                    - { property: 'fechaEventoHasta',  type_options: { widget: 'single_text', format: 'dd/MM/yyyy', attr: { class: 'datetimepicker' }} }
+                    - { property: 'orden' }
+                    - { property: 'fotoAgenda', type: 'collection', type_options: { entry_type: 'AppBundle\Form\FotoAgendaType', by_reference: false  } }
+                    - { property: 'direccion', type: 'collection', type_options: { entry_type: 'AppBundle\Form\DireccionAgendaType', by_reference: false  } }
+                    - { property: 'activo' }

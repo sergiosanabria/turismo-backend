@@ -1,0 +1,21 @@
+#easy admin
+easy_admin:
+    entities:
+        Noticia:
+            class: AppBundle\Entity\Noticia
+            list:
+                actions:
+#                    - { name: '-edit'}
+#                    - { name: 'noticia_edit', type: 'route', icon: 'pencil', label: '' }
+                    - { name: 'delete', icon: 'trash', label: '' }
+            form:
+                fields:
+                    - { property: 'titulo' }
+                    - { property: 'resumen'}
+                    - { property: 'categoriaNoticia'}
+                    - { property: 'cuerpo', type: 'ckeditor' }
+                    - { property: 'visibleDesde', type_options: { widget: 'single_text', format: 'dd/MM/yyyy', attr: { class: 'datepicker' }} }
+                    - { property: 'visibleHasta',  type_options: { widget: 'single_text', format: 'dd/MM/yyyy', attr: { class: 'datepicker' }} }
+                    - { property: 'orden' }
+                    - { property: 'fotoNoticias', type: 'collection', type_options: { entry_type: 'AppBundle\Form\FotoNoticiaType', by_reference: true  } }
+                    - { property: 'activo' }

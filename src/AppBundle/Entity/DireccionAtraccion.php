@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
@@ -37,8 +38,8 @@ class DireccionAtraccion
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="altura", type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(name="altura", type="string", length=255,  nullable=true)
      */
     private $altura;
 
@@ -77,6 +78,8 @@ class DireccionAtraccion
     private $actualizadoPor;
 
     /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Matudelatower\UbicacionBundle\Entity\Localidad")
      * @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
      */

@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * DireccionAgenda
@@ -38,8 +39,8 @@ class DireccionAgenda
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="altura", type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(name="altura", type="string", length=255,  nullable=true)
      */
     private $altura;
 
@@ -78,6 +79,8 @@ class DireccionAgenda
     private $actualizadoPor;
 
     /**
+     * @var
+     *
      * @ORM\ManyToOne(targetEntity="Matudelatower\UbicacionBundle\Entity\Localidad")
      * @ORM\JoinColumn(name="localidad_id", referencedColumnName="id")
      */
@@ -93,7 +96,7 @@ class DireccionAgenda
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -116,7 +119,7 @@ class DireccionAgenda
     /**
      * Get calle
      *
-     * @return string 
+     * @return string
      */
     public function getCalle()
     {
@@ -139,7 +142,7 @@ class DireccionAgenda
     /**
      * Get altura
      *
-     * @return string 
+     * @return string
      */
     public function getAltura()
     {
@@ -162,7 +165,7 @@ class DireccionAgenda
     /**
      * Get creado
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreado()
     {
@@ -185,7 +188,7 @@ class DireccionAgenda
     /**
      * Get actualizado
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getActualizado()
     {
@@ -208,7 +211,7 @@ class DireccionAgenda
     /**
      * Get creadoPor
      *
-     * @return \UsuariosBundle\Entity\Usuario 
+     * @return \UsuariosBundle\Entity\Usuario
      */
     public function getCreadoPor()
     {
@@ -231,7 +234,7 @@ class DireccionAgenda
     /**
      * Get actualizadoPor
      *
-     * @return \UsuariosBundle\Entity\Usuario 
+     * @return \UsuariosBundle\Entity\Usuario
      */
     public function getActualizadoPor()
     {
@@ -254,7 +257,7 @@ class DireccionAgenda
     /**
      * Get localidad
      *
-     * @return \Matudelatower\UbicacionBundle\Entity\Localidad 
+     * @return \Matudelatower\UbicacionBundle\Entity\Localidad
      */
     public function getLocalidad()
     {
@@ -277,7 +280,7 @@ class DireccionAgenda
     /**
      * Get agenda
      *
-     * @return \AppBundle\Entity\Agenda 
+     * @return \AppBundle\Entity\Agenda
      */
     public function getAgenda()
     {

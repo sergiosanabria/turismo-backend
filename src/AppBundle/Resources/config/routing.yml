@@ -10,6 +10,10 @@ app_atraccion:
     resource: "@AppBundle/Resources/config/routing/atraccion.yml"
     prefix:   /atraccion
 
+ubicacion:
+    resource: "@UbicacionBundle/Resources/config/routing.yml"
+    prefix:   /ubicacion
+
 app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Default:index }

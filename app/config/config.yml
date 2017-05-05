@@ -9,9 +9,10 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: es
-    app.path.ip: 192.168.0.117
+    app.path.ip: 192.168.0.113
     app.path.images.atraccion: /uploads/images/atraccion
     app.path.images.noticia: /uploads/images/noticia
+    app.path.images.agenda: /uploads/images/agenda
 
 framework:
     #esi:             ~
@@ -156,3 +157,11 @@ nelmio_cors:
                 allow_methods: ['POST', 'PUT', 'GET', 'DELETE']
                 max_age: 3600
                 hosts: ['^api\.']
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        empresas_image:
+            uri_prefix:         %app.path.images.agenda%
+            upload_destination: %kernel.root_dir%/../web%app.path.images.agenda%
+            namer:              vich_uploader.namer_origname
